@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 
+
+
 class AdminController extends Controller
 {
     public function view_category(){
@@ -18,6 +20,9 @@ class AdminController extends Controller
         $category->category_name = $request->category;
 
         $category->save();
+
+    
+        toastr()->addSuccess('Category added successfully!');
 
         return redirect() ->back();
 

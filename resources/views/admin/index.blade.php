@@ -2,6 +2,18 @@
 <html>
   <head> 
     @include("admin.css")
+    <!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<!-- jQuery (Required for Toastr) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Toastr JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- Flasher Toastr -->
+@flasher_render
+
   </head>
   <body>
     
@@ -23,6 +35,8 @@
           </div>
       </div>
     </div>
+    <!-- jQuery (Required for Toastr) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- JavaScript files-->
     <script src="{{asset('admincss/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('admincss/vendor/popper.js/umd/popper.min.js')}}"> </script>
