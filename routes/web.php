@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+//admin
 
 Route::get('admin/dashboard',[HomeController::class,'index'])-> middleware(['auth','admin']);
 
@@ -33,7 +34,9 @@ Route::get('view_category',[AdminController::class,'view_category'])-> middlewar
 Route::post('add_category',[AdminController::class,'add_category'])-> middleware(['auth','admin']);
 
 Route::get('delete_category/{id}',[AdminController::class,'delete_category'])-> middleware(['auth','admin']);
+
 route::get('edit_category/{id}',[AdminController::class, 'edit_category']) ->middleware(['auth','admin']);
+
 Route::post('update_category/{id}',[AdminController::class,'edit_category'])-> middleware(['auth','admin']);
 
 Route::get('add_product',[AdminController::class,'add_product'])-> middleware(['auth','admin']);
@@ -47,3 +50,7 @@ route::get('delete_product/{id}',[AdminController::class, 'delete_product']) ->m
 route::get('update_product/{id}',[AdminController::class, 'update_product']) ->middleware(['auth','admin']);
 
 route::post('edit_product/{id}',[AdminController::class, 'edit_product']) ->middleware(['auth','admin']);
+
+route::get('product_search',[AdminController::class, 'product_search']) ->middleware(['auth','admin']);
+
+route::get('product_details/{id}',[HomeController::class, 'product_details']);
