@@ -17,7 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 60px;
+            margin: 30px;
         }
 
         .table_design {
