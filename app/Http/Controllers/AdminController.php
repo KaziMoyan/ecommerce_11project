@@ -82,8 +82,13 @@ return redirect('/view Category');
 
 
     }
+    public function view_product(){
+
+        $product = Product::paginate(4);
+    
+        return view('admin.view_product',compact('product'));
+    }
+
+
 
 }
-
-
-
