@@ -18,6 +18,27 @@
 
     }
 
+    .table_deg{
+        text-align: center;
+        margin: auto;
+        border: 2px saddlebrown;
+        margin-top: 5;
+        width: 600px;
+        
+    }
+    th{
+        background-color: skyblue;
+        padding: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+    }
+    td{
+        color:white;
+        padding: 10px;
+        border: 1px solid rgb(203, 222, 29); 
+    }
+
     </style>
   </head>
   <body>
@@ -47,11 +68,72 @@
            </form>
             </div>
 
+            <table class="table_deg">
+                <tr >
+                    <th>Category Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+
+                @foreach ($data as $data )
+                    
+                <tr>
+                    <td>{{$data->category_name}}</td>
+
+                    <td>
+                        <a class="btn btn-primary-success" href="{{url('edit_category',$data->id)}}">Edit</a>
+
+
+                    </td>
+
+
+
+                    <td>
+
+                    <a class="btn btn-danger" onclick="confirmation(event)" 
+                    href="{{url('delete_category',$data->id)}}">Delete</a>
+                    </td>
+                </tr>
+
+                @endforeach
+
+            </table>
+
 
 
           </div>
       </div>
     </div>
+    
+    <script type="text/JavaScript">
+
+function confirmation(ev) {
+    ev.preventDefault(); // Prevent the default action
+
+    var urlToRedirect = ev.currentTarget.getAttribute('href'); // Get the link URL
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Category not added successfully!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, proceed!",
+        cancelButtonText: "Cancel"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = urlToRedirect; // Redirect if confirmed
+        }
+    });
+}
+
+       
+    </script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></scrip>
+
     <!-- JavaScript files-->
     <script src="{{asset('admincss/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('admincss/vendor/popper.js/umd/popper.min.js')}}"> </script>
