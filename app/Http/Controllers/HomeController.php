@@ -9,8 +9,13 @@ use App\Models\User;
 use App\Models\Order;
 class HomeController extends Controller
 {
-    public function index(){
-        return view('admin.index');
+    public function index()
+    {
+        $user = User:: where('usertype','user')->get()->count();
+        $product = Product::all()->count();
+        $order = Order::all()->count();
+        $deliverd= Order::where('status','Deliverd')->get()->count();
+        return view('admin.index',compact('user','product','order','deliverd'));
     }
     public function home(){
 
@@ -113,5 +118,12 @@ public function confirm_order(Request $request)
 
     return redirect()->back();
 }
+public function myorders(){
+    $user = Auth::user()->id;
+    $count = Cart:: where('user_id',$user)->get()->count();
+    $order =Order:: where('user_id',$user)->get();
+    return view('home.order',compact('count','order'));
+}
+
 
 }
