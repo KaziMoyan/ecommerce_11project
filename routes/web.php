@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-
+use App\Models\Product;
 
 
 Route::get('/', function () {
@@ -13,10 +13,9 @@ Route::get('/', function () {
 
 Route::get('/',[HomeController::class,'home']);
 
+Route::get('/dashboard', [HomeController::class, 'login_home'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('home.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -53,4 +52,14 @@ route::post('edit_product/{id}',[AdminController::class, 'edit_product']) ->midd
 
 route::get('product_search',[AdminController::class, 'product_search']) ->middleware(['auth','admin']);
 
+
+//user
 route::get('product_details/{id}',[HomeController::class, 'product_details']);
+
+route::get('add_cart/{id}',[HomeController::class, 'add_cart'])->middleware(['auth', 'verified']);
+
+route::get('mycart',[HomeController::class, 'mycart'])->middleware(['auth', 'verified']);
+
+route::get('delete_cart/{id}',[HomeController::class, 'delete_cart'])->middleware(['auth', 'verified']);
+
+route::post('confirm_order',[HomeController::class, 'confirm_order'])->middleware(['auth', 'verified']);
