@@ -76,7 +76,6 @@ class HomeController extends Controller
 
 
 
-
     }
     return view('home.mycart',compact('count','cart'));
   }
@@ -124,6 +123,58 @@ public function myorders(){
     $order =Order:: where('user_id',$user)->get();
     return view('home.order',compact('count','order'));
 }
+public function shop()
+{
+    $product = Product::all();
 
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    } 
+    return view('home.shop',compact('product','count'));
 
+}
+public function about()
+{
+    
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    }
+    return view('home.about',compact('count'));
+
+}
+public function testimonial()
+{
+    
+    if(Auth::id()){
+        $user = Auth::user();
+        $userid = $user->id;
+        $count = Cart:: where('user_id',$userid)->count();
+    }
+    else{
+        $count='';
+    }
+    return view('home.testimonial',compact('count'));
+
+}
+
+public function contact()
+{
+    $count = 0; // Default value for the cart count
+
+    if (Auth::check()) { // Use Auth::check() to verify authentication
+        $user = Auth::user();
+        $count = Cart::where('user_id', $user->id)->count();
+    }
+    return view('home.contact', compact('count'));
+}
 }
